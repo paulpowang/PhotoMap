@@ -8,6 +8,11 @@
 
 import UIKit
 
+// Protocol definition - top of LocationsViewController.swift
+protocol LocationsViewControllerDelegate : class {
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber)
+}
+
 class LocationsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     // TODO: Fill in actual CLIENT_ID and CLIENT_SECRET
@@ -16,21 +21,9 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
-
-    var results: NSArray = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        tableView.dataSource = self
-        tableView.delegate = self
-        searchBar.delegate = self
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+    weak var delegate: LocationsViewControllerDelegate!
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return results.count
@@ -43,20 +36,40 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         
         return cell
     }
-
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // This is the selected venue
         let venue = results[(indexPath as NSIndexPath).row] as! NSDictionary
-
+        
         let lat = venue.value(forKeyPath: "location.lat") as! NSNumber
         let lng = venue.value(forKeyPath: "location.lng") as! NSNumber
-
+        
         let latString = "\(lat)"
         let lngString = "\(lng)"
-
+        
+        delegate.locationsPickedLocation(controller: self, latitude: lat, longitude: lng)
+        
         print(latString + " " + lngString)
     }
     
+    var results: NSArray = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        tableView.dataSource = self
+        tableView.delegate = self
+        searchBar.delegate = self
+    }
+    
+    
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         let newText = NSString(string: searchBar.text!).replacingCharacters(in: range, with: text)
         fetchLocations(newText)
@@ -95,5 +108,7 @@ class LocationsViewController: UIViewController, UITableViewDelegate, UITableVie
         });
         task.resume()
     }
-
+    
 }
+
+

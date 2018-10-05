@@ -12,10 +12,13 @@ import CoreLocation
 import AddressBookUI
 import MessageUI
 
-class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, LocationsViewControllerDelegate {
     
     
-    var mapView: MKMapView!
+    var capturedPhoto: UIImage?
+    
+    @IBOutlet weak var mapView: MKMapView!
+    
     
     
 
@@ -32,16 +35,14 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667),
                                               MKCoordinateSpanMake(0.1, 0.1))
         mapView.setRegion(sfRegion, animated: false)
+        
     }
     
-    
+    //Camera Press Button - To call camera or photo library
     @IBAction func pressCameraButton(_ sender: Any) {
         let vc = UIImagePickerController()
         vc.delegate = self
         vc.allowsEditing = true
-        
-        
-        
         
         //check camera available
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -54,6 +55,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         self.present(vc, animated: true, completion: nil)
     }
     
+    
     func imagePickerController(_ picker: UIImagePickerController,
                                didFinishPickingMediaWithInfo info: [String : Any]) {
         // Get the image captured by the UIImagePickerController
@@ -61,9 +63,21 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
+        capturedPhoto = editedImage
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
+        performSegue(withIdentifier: "tagSegue", sender: self)
+    }
+    //to get location: latitude and longtitude
+    func locationsPickedLocation(controller: LocationsViewController, latitude: NSNumber, longitude: NSNumber) {
+        let locationCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = locationCoordinate
+        annotation.title = "Picture!"
+        mapView.addAnnotation(annotation)
+        self.navigationController?.popToViewController(self, animated: true)
+        
     }
     
     
@@ -76,12 +90,17 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
 
     
-    // MARK: - Navigation
+    
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "tagSegue" {
+            let vc: LocationsViewController = segue.destination as! LocationsViewController
+            vc.delegate = self
+            
+        }
     }
     
 
