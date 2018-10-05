@@ -24,9 +24,8 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="EPh-WW-dhG">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmI-Yc-bBs">
-                                <rect key="frame" x="155" y="268" width="64" height="64"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nmI-Yc-bBs">
+                                <rect key="frame" x="155.5" y="595" width="64" height="64"/>
                                 <state key="normal" backgroundImage="camera"/>
                                 <connections>
                                     <action selector="pressCameraButton:" destination="ghP-Ww-KKQ" eventType="touchUpInside" id="rZH-7a-h9O"/>
@@ -37,6 +36,8 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="EPh-WW-dhG" secondAttribute="trailing" id="9s8-0b-mJ7"/>
                             <constraint firstItem="EPh-WW-dhG" firstAttribute="top" secondItem="vrG-Wc-0bn" secondAttribute="bottom" id="EEP-sh-7qp"/>
+                            <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="nmI-Yc-bBs" secondAttribute="bottom" constant="8" id="MDr-f2-i3y"/>
+                            <constraint firstItem="nmI-Yc-bBs" firstAttribute="centerX" secondItem="EPh-WW-dhG" secondAttribute="centerX" id="NNN-jH-F5b"/>
                             <constraint firstItem="ufw-e1-uLx" firstAttribute="top" secondItem="EPh-WW-dhG" secondAttribute="bottom" id="mt8-fF-Qm4"/>
                             <constraint firstItem="EPh-WW-dhG" firstAttribute="leading" secondItem="Lxe-6f-KEH" secondAttribute="leading" id="xsw-zV-6CI"/>
                         </constraints>
@@ -55,7 +56,7 @@
         <!--Full Image View Controller-->
         <scene sceneID="VWW-Rb-sI4">
             <objects>
-                <viewController id="WeT-38-qba" customClass="FullImageViewController" customModule="Photo_Map" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FullImageSegue" id="WeT-38-qba" customClass="FullImageViewController" customModule="Photo_Map" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FF8-mr-LhG"/>
                         <viewControllerLayoutGuide type="bottom" id="N8d-FM-OAP"/>

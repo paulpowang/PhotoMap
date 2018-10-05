@@ -18,6 +18,7 @@
 		22BB9BD519F5DD21000048C2 /* LocationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BB9BD419F5DD21000048C2 /* LocationCell.swift */; };
 		C0BB236311B5B261447DED51 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 12B190D8026AA9DA033871B1 /* Pods.framework */; };
 		DA90EB7E2167021A004120B8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA90EB7D2167021A004120B8 /* MapKit.framework */; };
+		DA90EB802167F7CB004120B8 /* PinAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90EB7F2167F7CB004120B8 /* PinAnnotation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +49,7 @@
 		22BB9BD419F5DD21000048C2 /* LocationCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationCell.swift; sourceTree = "<group>"; };
 		3798A91E53EF9F5C294484AF /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		DA90EB7D2167021A004120B8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		DA90EB7F2167F7CB004120B8 /* PinAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinAnnotation.swift; sourceTree = "<group>"; };
 		F5BE47FFEDE0C18F03BCCC32 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -102,6 +104,7 @@
 				228D475719F5DA9F00DE9903 /* LaunchScreen.xib */,
 				228D474C19F5DA9F00DE9903 /* Supporting Files */,
 				2258D28219F5E60100F013CE /* Photo Map-Bridging-Header.h */,
+				DA90EB7F2167F7CB004120B8 /* PinAnnotation.swift */,
 			);
 			path = "Photo Map";
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				22BB9BD519F5DD21000048C2 /* LocationCell.swift in Sources */,
 				228D474F19F5DA9F00DE9903 /* AppDelegate.swift in Sources */,
 				11D16EF31BD08AAE00B6CBFE /* PhotoMapViewController.swift in Sources */,
+				DA90EB802167F7CB004120B8 /* PinAnnotation.swift in Sources */,
 				228D477019F5DAFF00DE9903 /* LocationsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
