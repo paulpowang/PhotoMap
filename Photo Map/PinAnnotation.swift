@@ -7,14 +7,15 @@
 //
 
 import MapKit
-import AddressBook
+//import AddressBook
 
 class PinAnnotation: NSObject, MKAnnotation {
     
-    let title : String?
-    let locationName: String?
-    let coordinate: CLLocationCoordinate2D
+    //let title : String?
+    //let locationName: String?
+    //let coordinate: CLLocationCoordinate2D
     
+    /*
     init(title: String, locationName: String?, coordinate: CLLocationCoordinate2D) {
         self.title = title
         self.locationName = locationName
@@ -25,6 +26,13 @@ class PinAnnotation: NSObject, MKAnnotation {
     
     var subtitle: String? {
         return locationName
+    }
+ */
+    var coordinate: CLLocationCoordinate2D = CLLocationCoordinate2DMake(0, 0)
+    var photo: UIImage!
+    
+    var title: String? {
+        return "\(coordinate.latitude)"
     }
     
 }

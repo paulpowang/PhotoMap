@@ -30,6 +30,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     
     //var capturedPhoto: UIImage?
     @IBOutlet weak var mapView: MKMapView!
+    var photoImage: UIImage!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +63,23 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         let reuseID = "myAnnotationView"
         
+        
+        // resize the imageView
+        let resizedImageView = UIImageView(frame: CGRect(x:0, y:0, width:45, height:45))
+        resizedImageView.layer.borderColor = UIColor.white.cgColor
+        resizedImageView.layer.borderWidth = 3.0
+        resizedImageView.contentMode = UIViewContentMode.scaleAspectFill
+        resizedImageView.image = (annotation as? PinAnnotation)?.photo
+        
+        // set postImage to resize
+        resizedImageView.image = photoImage
+        
+        UIGraphicsBeginImageContext(resizedImageView.frame.size)
+        resizedImageView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let thumbnailImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        
         var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseID)
         if (annotationView == nil) {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseID)
@@ -72,7 +90,8 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         }
         
         let imageView = annotationView?.leftCalloutAccessoryView as! UIImageView
-        imageView.image = UIImage(named: "camera")
+        //imageView.image = UIImage(named: "camera")
+        imageView.image = thumbnailImage
         
         
         return annotationView
@@ -87,7 +106,7 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         let editedImage = info[UIImagePickerControllerEditedImage] as! UIImage
         
         // Do something with the images (based on your use case)
-        //capturedPhoto = editedImage
+        photoImage = editedImage
         
         // Dismiss UIImagePickerController to go back to your original view controller
         dismiss(animated: true, completion: nil)
@@ -99,11 +118,12 @@ class PhotoMapViewController: UIViewController, UIImagePickerControllerDelegate,
         
         let locationCoordinate = CLLocationCoordinate2D(latitude: CLLocationDegrees(latitude), longitude: CLLocationDegrees(longitude))
         
-        let annotation = MKPointAnnotation()
+        //let annotation = MKPointAnnotation()
+        let annotation = PinAnnotation()
         
         annotation.coordinate = locationCoordinate
         
-        annotation.title = "Picture!"
+        //annotation.title = "Picture!"
         mapView.addAnnotation(annotation)
         self.navigationController?.popToViewController(self, animated: true)
         
